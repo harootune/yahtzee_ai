@@ -28,6 +28,7 @@ class Dice
         // variables
         int places[5];
         int counts[6];
+        int rolls;
         std::set<int> combos;
 
         // functions

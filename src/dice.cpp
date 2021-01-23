@@ -14,6 +14,7 @@ Dice::Dice()
     };
 
     combos.clear();
+    rolls = 1;
 };
 
 int Dice::total()
@@ -30,8 +31,16 @@ int Dice::total()
 
 void Dice::reRoll(int place)
 {
-    places[place] = (rand() % 6) + 1;
-    _findCombos();
+    if (rolls < 3)
+    {
+        places[place] = (rand() % 6) + 1;
+        _findCombos();
+        rolls++;
+    }
+    else
+    {
+        throw std::logic_error("Cannot re-roll dice which have been rolled three times.");
+    };
 };
 
 void Dice::_findCombos()
@@ -41,6 +50,8 @@ void Dice::_findCombos()
     _findNs();
     _findFlushes();
     _findFullHouse();
+
+    combos.insert(Combos::CHANCE);
 };
 
 void Dice::_findNs()
